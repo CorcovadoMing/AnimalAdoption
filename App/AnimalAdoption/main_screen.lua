@@ -29,8 +29,8 @@ function scene:create( event )
 	image.x = display.contentCenterX
 	image.y = display.contentCenterY
 	image.fill.effect = "filter.exampleBlurGaussian"
-	image.fill.effect.horizontal.blurSize = 20
-	image.fill.effect.vertical.blurSize = 20
+	image.fill.effect.horizontal.blurSize = 50
+	image.fill.effect.vertical.blurSize = 50
 	sceneGroup:insert( image )
 end
 
