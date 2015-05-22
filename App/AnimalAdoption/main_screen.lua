@@ -43,25 +43,25 @@ function scene:show( event )
 	local phase = event.phase	
 	if "did" == phase then
 		button1 = widget.newButton {
-    		width = 640,
-    		height = 500,
+    		width = 200,
+    		height = 200,
     		defaultFile = "images/get_btn.png",
 		    overFile = "images/get_btn.png",
 		    label = "",
 		    onEvent = handleGetEvent
 		}
-		button1.x = display.contentCenterX - 85
+		button1.x = display.contentCenterX
 		button1.y = display.contentCenterY
 
 		button2 = widget.newButton {
-    		width = 640,
-    		height = 500,
+    		width = 200,
+    		height = 200,
     		defaultFile = "images/give_btn.png",
 		    overFile = "images/give_btn.png",
 		    label = "",
 		    onEvent = handleGiveEvent
 		}
-		button2.x = display.contentCenterX - 85
+		button2.x = display.contentCenterX
 		button2.y = display.contentCenterY + display.contentCenterY / 2
 
 		-- remove previous scene's view
