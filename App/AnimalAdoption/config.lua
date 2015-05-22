@@ -1,13 +1,12 @@
-application = 
-{
-	content = 
-	{ 
-		scale = "adaptive",
-		fps = 60,
+application = {
+	content = {
+		width = 640,
+		height = 1136, 
+		scale = "letterBox",
+		fps = 30,
 		
 		imageSuffix = {
-			["@2x"] = 1.5,
-			["@3x"] = 2.5,
+		    ["@2x"] = 2,
 		}
 	}
 }

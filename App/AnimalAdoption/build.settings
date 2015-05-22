@@ -14,6 +14,8 @@ settings =
 	{
 		plist =
 		{
+			UIStatusBarHidden = false,
+			UIApplicationExitsOnSuspend = true,
 			CFBundleIconFiles =
 			{
 				"Icon.png", 
