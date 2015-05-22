@@ -14,13 +14,13 @@ local image, text1, text2, text3, memTimer
 
 local function handleGetEvent( event )
     if ( "ended" == event.phase ) then
-        composer.gotoScene( "scene2", "fade", 0  )
+        composer.gotoScene( "scene2", "crossFade", 400  )
     end
 end
 
 local function handleGiveEvent( event )
     if ( "ended" == event.phase ) then
-        composer.gotoScene( "scene3", "fade", 400  )
+        composer.gotoScene( "scene3", "crossFade", 400  )
     end
 end
 
@@ -29,14 +29,8 @@ end
 function scene:create( event )
 	local sceneGroup = self.view
 	local image = display.newImage( "images/main_screen.jpg" )
-	local effect = require( "kernel_filter_example_blur_gaussian_gl" )
-	graphics.defineEffect( effect )
-
 	image.x = display.contentCenterX
 	image.y = display.contentCenterY
-	image.fill.effect = "filter.exampleBlurGaussian"
-	image.fill.effect.horizontal.blurSize = 10
-	image.fill.effect.vertical.blurSize = 10
 	sceneGroup:insert( image )
 
 	local title = display.newImage( "images/title.png" )
