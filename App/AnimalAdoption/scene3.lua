@@ -19,7 +19,7 @@ end
 function scene:create( event )
 	local sceneGroup = self.view
 	
-	image = display.newImage( "bg3.jpg" )
+	image = display.newImage( "images/main_screen.jpg" )
 	image.x = display.contentCenterX
 	image.y = display.contentCenterY
 	

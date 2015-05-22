@@ -12,15 +12,15 @@ local scene = composer.newScene()
 local image, text1, text2, text3, memTimer
 
 
-local function handleGiveEvent( event )
+local function handleGetEvent( event )
     if ( "ended" == event.phase ) then
-        composer.gotoScene( "scene2", "fade", 400  )
+        composer.gotoScene( "scene2", "fade", 0  )
     end
 end
 
-local function handleGetEvent( event )
+local function handleGiveEvent( event )
     if ( "ended" == event.phase ) then
-        composer.gotoScene( "scene3", "fade", 0  )
+        composer.gotoScene( "scene3", "fade", 400  )
     end
 end
 

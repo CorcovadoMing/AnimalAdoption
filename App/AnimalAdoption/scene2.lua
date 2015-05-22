@@ -6,7 +6,6 @@
 
 local composer = require( "composer" )
 local json = require "json"
-local utf8 = require "utf8"
 local scene = composer.newScene()
 
 local image, text1, text2, text3, memTimer
@@ -41,7 +40,7 @@ function scene:create( event )
 	network.request( "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx", "GET", networkListener )
 	local sceneGroup = self.view
 	
-	image = display.newImage( "bg2.jpg" )
+	image = display.newImage( "images/main_screen.jpg" )
 	image.x = display.contentCenterX
 	image.y = display.contentCenterY
 	
