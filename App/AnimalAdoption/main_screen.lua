@@ -8,22 +8,19 @@ local composer = require( "composer" )
 local widget = require( "widget" )
 local scene = composer.newScene()
 
-
-local image, text1, text2, text3, memTimer
-
+local image, text1, text2, text3
 
 local function handleGetEvent( event )
     if ( "ended" == event.phase ) then
-        composer.gotoScene( "scene2", "crossFade", 400  )
+        composer.gotoScene( "scene_give", "crossFade", 800  )
     end
 end
 
 local function handleGiveEvent( event )
     if ( "ended" == event.phase ) then
-        composer.gotoScene( "scene3", "crossFade", 400  )
+        composer.gotoScene( "scene3", "crossFade", 800  )
     end
 end
-
 
 -- Called when the scene's view does not exist:
 function scene:create( event )
@@ -40,7 +37,8 @@ function scene:create( event )
 end
 
 function scene:show( event )	
-	local phase = event.phase	
+	local phase = event.phase
+	print(#data)	
 	if "did" == phase then
 		button1 = widget.newButton {
     		width = 200,
@@ -66,9 +64,6 @@ function scene:show( event )
 
 		-- remove previous scene's view
 		composer.removeScene( "scene4" )
-		
-
-		
 	end	
 end
 

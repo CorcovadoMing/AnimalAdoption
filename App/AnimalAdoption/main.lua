@@ -10,17 +10,81 @@
 --
 -- Supports Graphics 2.0
 ------------------------------------------------------------
+local composer = require "composer"
+local widget = require "widget"
+local json = require ( "json" )
+
+function split(str, pat)
+   local t = {}
+   local fpat = "(.-)" .. pat
+   local last_end = 1
+   local s, e, cap = str:find(fpat, 1)
+   while s do
+      if s ~= 1 or cap ~= "" then
+	 table.insert(t,cap)
+      end
+      last_end = e+1
+      s, e, cap = str:find(fpat, last_end)
+   end
+   if last_end <= #str then
+      cap = str:sub(last_end)
+      table.insert(t, cap)
+   end
+   return t
+end
+
+local function networkListener( event )
+    if ( event.isError ) then
+        print( "Network error!" )
+    else
+        local decode, pos, msg = json.decode( event.response )
+        if not decode then
+    		print( "Decode failed at "..tostring(pos)..": "..tostring(msg) )
+		else
+    		for _, v in ipairs(decode) do
+    			if(not hash[v.animal_id]) then
+    				data[#data+1] = v
+    				hash[v.animal_id] = true
+    			end
+    		end
+
+    		for i=1, #data do
+	    		local url =  data[i].album_file
+				local split_url = split(url, '/')
+				local tmp_image = table.remove(split_url)
+				local function imageNetworkListener( event )
+				    if ( event.isError ) then
+				        print ( "Network error - download failed" )
+				    else
+			        	event.target.alpha = 0
+			        	transition.to( event.target, { alpha = 1.0 } )
+				    end
+				end
+
+
+				local path = system.pathForFile( tmp_image, system.TemporaryDirectory )
+				local fhd = io.open( path )
+				if fhd then
+				   print( "File exists" )
+				   fhd:close()
+				else
+					network.download( url, "GET", imageNetworkListener, tmp_image, system.TemporaryDirectory )
+				end
+			end
+			print("done")
+		end
+    end
+end
 
 -- hide device status bar
 display.setStatusBar( display.HiddenStatusBar )
 
--- require controller module
-local composer = require "composer"
-
-local widget = require "widget"
+data = {}
+hash = {}
+network.request( "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx", "GET", networkListener )
 
 -- load first scene
-composer.gotoScene( "main_screen", "fade", 400 )
+composer.gotoScene( "main_screen", "crossFade", 2000 )
 
 --
 -- Display objects added below will not respond to composer transitions
