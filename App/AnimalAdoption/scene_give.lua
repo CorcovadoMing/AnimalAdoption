@@ -29,20 +29,28 @@ local function onRowRender( event )
 		fhd:close()
 		rowImage = display.newImage( tmp_image, system.TemporaryDirectory)
 	else
-		rowImage = display.newImage( "images/main_screen.jpg" )
+		rowImage = display.newImage( "images/no_pic.png" )
 	end
 	rowImage:scale(640/rowImage.width, row.contentHeight/rowImage.height)
 	rowImage.x = 320
 	rowImage.y = row.contentHeight/2
 	row:insert(rowImage)
 
-	local title = res[row.index].animal_kind .. ', ' .. res[row.index].animal_colour .. ", " .. sex[res[row.index].animal_sex] .. '\n' .. res[row.index].shelter_name
+	local title = res[row.index].animal_kind .. ', ' .. res[row.index].animal_colour .. ", " .. sex[res[row.index].animal_sex]
+	local title2 = res[row.index].shelter_name
 	local rowTitle = display.newText(row, title, 0, 0, native.systemFont, 40)
 	rowTitle.anchorX = 0
 	rowTitle.x = 20
 	rowTitle.y = row.contentHeight - 120
 	rowTitle:setFillColor(0.8, 0.8, 0.8)
 	row:insert(rowTitle)
+
+	local rowTitle2 = display.newText(row, title2, 0, 0, native.systemFont, 40)
+	rowTitle2.anchorX = 0
+	rowTitle2.x = 20
+	rowTitle2.y = row.contentHeight - 70
+	rowTitle2:setFillColor(0.8, 0.8, 0.8)
+	row:insert(rowTitle2)
 
 	local saperator = display.newRect(320, row.contentHeight - 5, 640, 10)
 	saperator:setFillColor(0.8, 0.8, 0.8)
@@ -61,12 +69,24 @@ function scene:show( event )
 	local nav_title
 	local image
 	local itemSelected
+	local itemSelected2
+	local itemSelected3
+	local itemSelected4
+	local itemSelected5
+	local itemSelected6
+	local itemSelected7
 
 	local function goBack( event )
 		homeButton.isVisible = true
 		transition.to( tableView, { x=display.contentWidth*0.5, time=600, transition=easing.outQuint } )
 		transition.to( descript_image, { x=display.contentWidth+descript_image.contentWidth, time=500, transition=easing.outQuint } )
 		transition.to( itemSelected, { x=display.contentWidth+itemSelected.contentWidth, time=700, transition=easing.outQuint } )
+		transition.to( itemSelected2, { x=display.contentWidth+itemSelected2.contentWidth, time=700, transition=easing.outQuint } )
+		transition.to( itemSelected3, { x=display.contentWidth+itemSelected3.contentWidth, time=700, transition=easing.outQuint } )
+		transition.to( itemSelected4, { x=display.contentWidth+itemSelected4.contentWidth, time=700, transition=easing.outQuint } )
+		transition.to( itemSelected5, { x=display.contentWidth+itemSelected5.contentWidth, time=700, transition=easing.outQuint } )
+		transition.to( itemSelected6, { x=display.contentWidth+itemSelected6.contentWidth, time=700, transition=easing.outQuint } )
+		transition.to( itemSelected7, { x=display.contentWidth+itemSelected7.contentWidth, time=700, transition=easing.outQuint } )
 		transition.to( event.target, { x=display.contentWidth+event.target.contentWidth, time=900, transition=easing.outQuint } )
 	end
 
@@ -101,12 +121,30 @@ function scene:show( event )
 			descript_image.x = display.contentWidth+descript_image.contentWidth
 			descript_image.y = descript_image.contentHeight/2 + 100
 
-			itemSelected.text = "種類: " .. res[row.index].animal_kind .. "\n" .. "體型: " .. bodytype[res[row.index].animal_bodytype] .. "\n" .. "顏色: " .. res[row.index].animal_colour .. "\n" .. "年齡: " .. age[res[row.index].animal_age] .. "\n" .. "收容所: " .. res[row.index].shelter_name .. "\n" .. "刊登時間: " .. res[row.index].animal_opendate .. "\n" .. "截止時間: " .. res[row.index].animal_closeddate
+			itemSelected.text = "種類: " .. res[row.index].animal_kind
+			itemSelected2.text = "體型: " .. bodytype[res[row.index].animal_bodytype]
+			itemSelected3.text = "顏色: " .. res[row.index].animal_colour
+			itemSelected4.text = "年齡: " .. age[res[row.index].animal_age]
+			itemSelected5.text = "收容所: " .. res[row.index].shelter_name
+			itemSelected6.text = "刊登時間: " .. res[row.index].animal_opendate
+			itemSelected7.text = "截止時間: " .. res[row.index].animal_closeddate
 			itemSelected:setFillColor(0.4, 0.2, 0.2)
+			itemSelected2:setFillColor(0.4, 0.2, 0.2)
+			itemSelected3:setFillColor(0.4, 0.2, 0.2)
+			itemSelected4:setFillColor(0.4, 0.2, 0.2)
+			itemSelected5:setFillColor(0.4, 0.2, 0.2)
+			itemSelected6:setFillColor(0.4, 0.2, 0.2)
+			itemSelected7:setFillColor(0.4, 0.2, 0.2)
 
 			transition.to( tableView, { x=((display.contentWidth/2)+ox+ox)*-1, time=500, transition=easing.outQuint } )
 			transition.to( descript_image, { x=display.contentCenterX, time=700, transition=easing.outQuint } )
 			transition.to( itemSelected, { x=itemSelected.contentWidth / 2 + 20, time=900, transition=easing.outQuint } )
+			transition.to( itemSelected2, { x=itemSelected2.contentWidth / 2 + 20, time=900, transition=easing.outQuint } )
+			transition.to( itemSelected3, { x=itemSelected3.contentWidth / 2 + 20, time=900, transition=easing.outQuint } )
+			transition.to( itemSelected4, { x=itemSelected4.contentWidth / 2 + 20, time=900, transition=easing.outQuint } )
+			transition.to( itemSelected5, { x=itemSelected5.contentWidth / 2 + 20, time=900, transition=easing.outQuint } )
+			transition.to( itemSelected6, { x=itemSelected6.contentWidth / 2 + 20, time=900, transition=easing.outQuint } )
+			transition.to( itemSelected7, { x=itemSelected7.contentWidth / 2 + 20, time=900, transition=easing.outQuint } )
 			transition.to( backButton, { x=50, time=1100, transition=easing.outQuint } )
 			homeButton.isVisible = false
 		end
@@ -122,7 +160,25 @@ function scene:show( event )
 
 		itemSelected = display.newText( "No description", 0, 0, native.systemFont, 40 )
 		itemSelected.x = display.contentWidth + itemSelected.contentWidth
-		itemSelected.y = 780
+		itemSelected.y = 650
+		itemSelected2 = display.newText( "No description", 0, 0, native.systemFont, 40 )
+		itemSelected2.x = display.contentWidth + itemSelected2.contentWidth
+		itemSelected2.y = 700
+		itemSelected3 = display.newText( "No description", 0, 0, native.systemFont, 40 )
+		itemSelected3.x = display.contentWidth + itemSelected3.contentWidth
+		itemSelected3.y = 750
+		itemSelected4 = display.newText( "No description", 0, 0, native.systemFont, 40 )
+		itemSelected4.x = display.contentWidth + itemSelected4.contentWidth
+		itemSelected4.y = 800
+		itemSelected5 = display.newText( "No description", 0, 0, native.systemFont, 40 )
+		itemSelected5.x = display.contentWidth + itemSelected5.contentWidth
+		itemSelected5.y = 850
+		itemSelected6 = display.newText( "No description", 0, 0, native.systemFont, 40 )
+		itemSelected6.x = display.contentWidth + itemSelected6.contentWidth
+		itemSelected6.y = 900
+		itemSelected7 = display.newText( "No description", 0, 0, native.systemFont, 40 )
+		itemSelected7.x = display.contentWidth + itemSelected7.contentWidth
+		itemSelected7.y = 950
 
 		tableView = widget.newTableView {
 		    left = 0,
