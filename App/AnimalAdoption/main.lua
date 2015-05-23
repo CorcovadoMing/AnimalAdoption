@@ -19,31 +19,40 @@ dogPath = system.pathForFile( "dog_data.txt", system.DocumentsDirectory )
 birdPath = system.pathForFile( "bird_data.txt", system.DocumentsDirectory )
 rabbitPath = system.pathForFile( "rabbit_data.txt", system.DocumentsDirectory )
 
-function saveData()
+function saveCatData()
 	--local levelseq = table.concat( levelArray, "-" )
 	file = io.open( catPath, "w" )
-	for k,v in pairs( my_cat ) do
-		file:write( k .. "=" .. v .. "," )
-	end
-	io.close( file )
+	local encoded = json.encode(my_cat)
+	print(encoded)
+	file:write(encoded)
+	io.close(file)
+end
 
+function saveDogData()
+	--local levelseq = table.concat( levelArray, "-" )
 	file = io.open( dogPath, "w" )
-	for k,v in pairs( my_dog ) do
-		file:write( k .. "=" .. v .. "," )
-	end
-	io.close( file )
+	local encoded = json.encode(my_dog)
+	print(encoded)
+	file:write(encoded)
+	io.close(file)
+end
 
+function saveBirdData()
+	--local levelseq = table.concat( levelArray, "-" )
 	file = io.open( birdPath, "w" )
-	for k,v in pairs( my_bird ) do
-		file:write( k .. "=" .. v .. "," )
-	end
-	io.close( file )
+	local encoded = json.encode(my_bird)
+	print(encoded)
+	file:write(encoded)
+	io.close(file)
+end
 
+function saveRabbitData()
+	--local levelseq = table.concat( levelArray, "-" )
 	file = io.open( rabbitPath, "w" )
-	for k,v in pairs( my_rabbit ) do
-		file:write( k .. "=" .. v .. "," )
-	end
-	io.close( file )
+	local encoded = json.encode(my_rabbit)
+	print(encoded)
+	file:write(encoded)
+	io.close(file)
 end
 
 
@@ -52,11 +61,7 @@ function loadData()
 	local file = io.open( catPath, "r" )
 	if file then
 		local dataStr = file:read( "*a" )
-		local datavars = str.split(dataStr, ",")	
-		for i = 1, #datavars do
-			local onevalue = str.split(datavars[i], "=")
-			my_cat[onevalue[1]] = onevalue[2]
-		end
+		my_cat = json.decode(dataStr)
 		io.close( file ) -- important!	
 	else
 		print ("no file found")
@@ -65,11 +70,7 @@ function loadData()
 	local file = io.open( dogPath, "r" )
 	if file then
 		local dataStr = file:read( "*a" )
-		local datavars = str.split(dataStr, ",")	
-		for i = 1, #datavars do
-			local onevalue = str.split(datavars[i], "=")
-			my_dog[onevalue[1]] = onevalue[2]
-		end
+		my_dog = json.decode(dataStr)
 		io.close( file ) -- important!	
 	else
 		print ("no file found")
@@ -78,11 +79,7 @@ function loadData()
 	local file = io.open( birdPath, "r" )
 	if file then
 		local dataStr = file:read( "*a" )
-		local datavars = str.split(dataStr, ",")	
-		for i = 1, #datavars do
-			local onevalue = str.split(datavars[i], "=")
-			my_bird[onevalue[1]] = onevalue[2]
-		end
+		my_bird = json.decode(dataStr)
 		io.close( file ) -- important!	
 	else
 		print ("no file found")
@@ -91,11 +88,7 @@ function loadData()
 	local file = io.open( rabbitPath, "r" )
 	if file then
 		local dataStr = file:read( "*a" )
-		local datavars = str.split(dataStr, ",")	
-		for i = 1, #datavars do
-			local onevalue = str.split(datavars[i], "=")
-			my_rabbit[onevalue[1]] = onevalue[2]
-		end
+		my_rabbit = json.decode(dataStr)
 		io.close( file ) -- important!	
 	else
 		print ("no file found")
@@ -202,6 +195,7 @@ my_dog = {}
 my_cat = {}
 
 loadData()
+print(#my_cat)
 
 res = {}
 

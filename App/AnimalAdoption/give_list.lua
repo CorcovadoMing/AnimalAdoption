@@ -116,7 +116,16 @@ function scene:show( event )
 			local url =  res[row.index].album_file
 			local split_url = split(url, '/')
 			local tmp_image = table.remove(split_url)
-			descript_image = display.newImage( tmp_image, system.TemporaryDirectory)
+
+			local path = system.pathForFile( tmp_image, system.TemporaryDirectory )
+			local fhd = io.open( path )
+			if fhd then
+				fhd:close()
+				descript_image = display.newImage( tmp_image, system.TemporaryDirectory)
+			else
+				descript_image = display.newImage( "images/no_pic.png" )
+			end
+
 			descript_image:scale(640/descript_image.width, row.contentHeight/descript_image.height)
 			descript_image.x = display.contentWidth+descript_image.contentWidth
 			descript_image.y = descript_image.contentHeight/2 + 100
