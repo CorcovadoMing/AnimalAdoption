@@ -18,7 +18,7 @@ end
 
 local function handleGiveEvent( event )
     if ( "ended" == event.phase ) then
-        composer.gotoScene( "scene3", "crossFade", 800  )
+        composer.gotoScene( "give_select", "crossFade", 1000  )
     end
 end
 
