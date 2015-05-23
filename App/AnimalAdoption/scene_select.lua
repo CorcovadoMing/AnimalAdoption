@@ -6,28 +6,48 @@ local image, text1, text2, text3
 
 local function handleCat( event )
     if ( "ended" == event.phase ) then
-    	res = cat
+    	for i = 1, #my_cat do
+    		res[#res+1] = my_cat[i]
+    	end
+    	for i = 1, #cat do
+    		res[#res+1] = cat[i]
+    	end
         composer.gotoScene( "scene_give", "crossFade", 1000  )
     end
 end
 
 local function handleDog( event )
     if ( "ended" == event.phase ) then
-    	res = dog
+    	for i = 1, #my_dog do
+    		res[#res+1] = my_dog[i]
+    	end
+    	for i = 1, #dog do
+    		res[#res+1] = dog[i]
+    	end
         composer.gotoScene( "scene_give", "crossFade", 1000  )
     end
 end
 
 local function handleBird( event )
     if ( "ended" == event.phase ) then
-    	res = bird
+    	for i = 1, #my_bird do
+    		res[#res+1] = my_bird[i]
+    	end
+    	for i = 1, #bird do
+    		res[#res+1] = bird[i]
+    	end
         composer.gotoScene( "scene_give", "crossFade", 1000  )
     end
 end
 
 local function handleRabbit( event )
     if ( "ended" == event.phase ) then
-    	res = rabbit
+    	for i = 1, #my_rabbit do
+    		res[#res+1] = my_rabbit[i]
+    	end
+    	for i = 1, #rabbit do
+    		res[#res+1] = rabbit[i]
+    	end
         composer.gotoScene( "scene_give", "crossFade", 1000  )
     end
 end

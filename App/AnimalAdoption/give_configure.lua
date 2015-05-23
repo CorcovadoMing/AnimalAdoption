@@ -4,30 +4,6 @@ local scene = composer.newScene()
 
 local image, text1, text2, text3
 
-local function handleCat( event )
-    if ( "ended" == event.phase ) then
-        composer.gotoScene( "give_configure", "crossFade", 1000  )
-    end
-end
-
-local function handleDog( event )
-    if ( "ended" == event.phase ) then
-        composer.gotoScene( "give_configure", "crossFade", 1000  )
-    end
-end
-
-local function handleBird( event )
-    if ( "ended" == event.phase ) then
-        composer.gotoScene( "give_configure", "crossFade", 1000  )
-    end
-end
-
-local function handleRabbit( event )
-    if ( "ended" == event.phase ) then
-        composer.gotoScene( "give_configure", "crossFade", 1000  )
-    end
-end
-
 -- Called when the scene's view does not exist:
 function scene:create( event )
 	local sceneGroup = self.view
@@ -88,6 +64,7 @@ function scene:show( event )
 		local my_data = {}
 		local date = os.date( "*t" ) 
 		my_data["animal_opendate"] = date.year.."-"..date.month.."-"..date.day
+		my_data["album_file"] = "/a/a/a.png"
 		local function place( event )
 		    if ( event.phase == "ended" or event.phase == "submitted" ) then
 		        -- do something with defaultField text
@@ -98,7 +75,7 @@ function scene:show( event )
 		local function current_place( event )
 		    if ( event.phase == "ended" or event.phase == "submitted" ) then
 		        -- do something with defaultField text
-		        my_data["shelter_place"] = event.target.text
+		        my_data["shelter_name"] = event.target.text
 		    end
 		end
 
@@ -140,20 +117,31 @@ function scene:show( event )
 		local function completeData( event )
 			if ( "ended" == event.phase ) then
         		if ("cat" == my_type) then
+        			my_data["animal_kind"] = "貓"
         			my_cat[#my_cat+1] = my_data
+        			saveCatData()
+        			res = my_cat
         		end
         		if ("dog" == my_type) then
+        			my_data["animal_kind"] = "狗"
         			my_dog[#my_dog+1] = my_data
+        			saveDogData()
+        			res = my_dog
         		end
         		if ("bird" == my_type) then
+        			my_data["animal_kind"] = "鳥"
         			my_bird[#my_bird+1] = my_data
+        			saveBirdData()
+        			res = my_bird
         		end
         		if ("rabbit" == my_type) then
+        			my_data["animal_kind"] = "兔"
         			my_rabbit[#my_rabbit+1] = my_data
+        			saveRabbitData()
+        			res = my_rabbit
         		end
-        		composer.gotoScene( "main_screen", "crossFade", 1000  )
+        		composer.gotoScene( "give_list", "crossFade", 1000  )
         		print(#my_cat)
-        		saveData()
     		end
 		end
 		-- Create text field
