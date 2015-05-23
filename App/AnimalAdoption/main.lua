@@ -14,6 +14,95 @@ local composer = require "composer"
 local widget = require "widget"
 local json = require ( "json" )
 
+catPath = system.pathForFile( "cat_data.txt", system.DocumentsDirectory )
+dogPath = system.pathForFile( "dog_data.txt", system.DocumentsDirectory )
+birdPath = system.pathForFile( "bird_data.txt", system.DocumentsDirectory )
+rabbitPath = system.pathForFile( "rabbit_data.txt", system.DocumentsDirectory )
+
+function saveData()
+	--local levelseq = table.concat( levelArray, "-" )
+	file = io.open( catPath, "w" )
+	for k,v in pairs( my_cat ) do
+		file:write( k .. "=" .. v .. "," )
+	end
+	io.close( file )
+
+	file = io.open( dogPath, "w" )
+	for k,v in pairs( my_dog ) do
+		file:write( k .. "=" .. v .. "," )
+	end
+	io.close( file )
+
+	file = io.open( birdPath, "w" )
+	for k,v in pairs( my_bird ) do
+		file:write( k .. "=" .. v .. "," )
+	end
+	io.close( file )
+
+	file = io.open( rabbitPath, "w" )
+	for k,v in pairs( my_rabbit ) do
+		file:write( k .. "=" .. v .. "," )
+	end
+	io.close( file )
+end
+
+
+
+function loadData()	
+	local file = io.open( catPath, "r" )
+	if file then
+		local dataStr = file:read( "*a" )
+		local datavars = str.split(dataStr, ",")	
+		for i = 1, #datavars do
+			local onevalue = str.split(datavars[i], "=")
+			my_cat[onevalue[1]] = onevalue[2]
+		end
+		io.close( file ) -- important!	
+	else
+		print ("no file found")
+	end
+
+	local file = io.open( dogPath, "r" )
+	if file then
+		local dataStr = file:read( "*a" )
+		local datavars = str.split(dataStr, ",")	
+		for i = 1, #datavars do
+			local onevalue = str.split(datavars[i], "=")
+			my_dog[onevalue[1]] = onevalue[2]
+		end
+		io.close( file ) -- important!	
+	else
+		print ("no file found")
+	end
+
+	local file = io.open( birdPath, "r" )
+	if file then
+		local dataStr = file:read( "*a" )
+		local datavars = str.split(dataStr, ",")	
+		for i = 1, #datavars do
+			local onevalue = str.split(datavars[i], "=")
+			my_bird[onevalue[1]] = onevalue[2]
+		end
+		io.close( file ) -- important!	
+	else
+		print ("no file found")
+	end
+
+	local file = io.open( rabbitPath, "r" )
+	if file then
+		local dataStr = file:read( "*a" )
+		local datavars = str.split(dataStr, ",")	
+		for i = 1, #datavars do
+			local onevalue = str.split(datavars[i], "=")
+			my_rabbit[onevalue[1]] = onevalue[2]
+		end
+		io.close( file ) -- important!	
+	else
+		print ("no file found")
+	end
+end
+
+
 function split(str, pat)
    local t = {}
    local fpat = "(.-)" .. pat
@@ -104,6 +193,15 @@ rabbit = {}
 bird = {}
 dog = {}
 cat = {}
+
+my_type = ""
+
+my_rabbit = {}
+my_bird = {}
+my_dog = {}
+my_cat = {}
+
+loadData()
 
 res = {}
 

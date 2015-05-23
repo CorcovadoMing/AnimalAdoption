@@ -6,29 +6,29 @@ local image, text1, text2, text3
 
 local function handleCat( event )
     if ( "ended" == event.phase ) then
-    	res = cat
-        composer.gotoScene( "scene_give", "crossFade", 1000  )
+    	my_type = "cat"
+        composer.gotoScene( "give_configure", "crossFade", 1000  )
     end
 end
 
 local function handleDog( event )
     if ( "ended" == event.phase ) then
-    	res = dog
-        composer.gotoScene( "scene_give", "crossFade", 1000  )
+    	my_type = "dog"
+        composer.gotoScene( "give_configure", "crossFade", 1000  )
     end
 end
 
 local function handleBird( event )
     if ( "ended" == event.phase ) then
-    	res = bird
-        composer.gotoScene( "scene_give", "crossFade", 1000  )
+    	my_type = "bird"
+        composer.gotoScene( "give_configure", "crossFade", 1000  )
     end
 end
 
 local function handleRabbit( event )
     if ( "ended" == event.phase ) then
-    	res = rabbit
-        composer.gotoScene( "scene_give", "crossFade", 1000  )
+    	my_type = "rabbit"
+        composer.gotoScene( "give_configure", "crossFade", 1000  )
     end
 end
 
