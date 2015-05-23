@@ -61,7 +61,6 @@ local function networkListener( event )
 				    end
 				end
 
-
 				local path = system.pathForFile( tmp_image, system.TemporaryDirectory )
 				local fhd = io.open( path )
 				if fhd then
@@ -71,6 +70,26 @@ local function networkListener( event )
 					network.download( url, "GET", imageNetworkListener, tmp_image, system.TemporaryDirectory )
 				end
 			end
+
+			for i=1, #data do
+				if ( data[i].animal_kind == "貓") then
+					cat[#cat+1] = data[i]
+				end
+				if (data[i].animal_kind == "狗") then
+					dog[#dog+1] = data[i]
+				end
+				if (data[i].animal_kind == "鳥") then
+					bird[#bird+1] = data[i]
+				end
+				if (data[i].animal_kind == "兔") then
+					rabbit[#rabbit+1] = data[i]
+				end
+			end
+
+			print(#cat)
+			print(#dog)
+			print(#bird)
+			print(#rabbit)
 			print("done")
 		end
     end
@@ -80,11 +99,19 @@ end
 display.setStatusBar( display.HiddenStatusBar )
 
 data = {}
+
+rabbit = {}
+bird = {}
+dog = {}
+cat = {}
+
+res = {}
+
 hash = {}
 network.request( "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx", "GET", networkListener )
 
 -- load first scene
-composer.gotoScene( "main_screen", "crossFade", 2000 )
+composer.gotoScene( "main_screen", "crossFade", 1000 )
 
 --
 -- Display objects added below will not respond to composer transitions

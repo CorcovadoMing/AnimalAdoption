@@ -12,7 +12,7 @@ local image, text1, text2, text3
 
 local function handleGetEvent( event )
     if ( "ended" == event.phase ) then
-        composer.gotoScene( "scene_give", "crossFade", 800  )
+        composer.gotoScene( "scene_select", "crossFade", 1000  )
     end
 end
 
@@ -29,22 +29,16 @@ function scene:create( event )
 	image.x = display.contentCenterX
 	image.y = display.contentCenterY
 	sceneGroup:insert( image )
-
-	local title = display.newImage( "images/title.png" )
-	title.x = display.contentCenterX
-	title.y = 200
-	sceneGroup:insert( title )
 end
 
 function scene:show( event )	
 	local phase = event.phase
-	print(#data)	
 	if "did" == phase then
 		button1 = widget.newButton {
-    		width = 200,
-    		height = 200,
-    		defaultFile = "images/get_btn.png",
-		    overFile = "images/get_btn.png",
+    		width = 220,
+    		height = 198,
+    		defaultFile = "images/give_btn.png",
+		    overFile = "images/give_btn.png",
 		    label = "",
 		    onEvent = handleGetEvent
 		}
@@ -52,18 +46,15 @@ function scene:show( event )
 		button1.y = display.contentCenterY
 
 		button2 = widget.newButton {
-    		width = 200,
-    		height = 200,
-    		defaultFile = "images/give_btn.png",
-		    overFile = "images/give_btn.png",
+    		width = 220,
+    		height = 198,
+    		defaultFile = "images/get_btn.png",
+		    overFile = "images/get_btn.png",
 		    label = "",
 		    onEvent = handleGiveEvent
 		}
 		button2.x = display.contentCenterX
-		button2.y = display.contentCenterY + display.contentCenterY / 2
-
-		-- remove previous scene's view
-		composer.removeScene( "scene4" )
+		button2.y = display.contentCenterY + display.contentCenterY / 2 - 30
 	end	
 end
 

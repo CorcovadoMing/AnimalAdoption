@@ -11,7 +11,7 @@ local image, text1, text2, text3, memTimer
 
 local function onSceneTouch( self, event )
 	if event.phase == "began" then
-		composer.gotoScene( "scene4", "crossFade", 1000  )
+		--composer.gotoScene( "scene4", "crossFade", 1000  )
 		return true
 	end
 end
